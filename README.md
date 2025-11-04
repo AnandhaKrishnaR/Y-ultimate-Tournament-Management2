@@ -73,12 +73,12 @@ A powerful relational database was essential to solve the core problem of data f
 
 Export to Sheets
 
-🚀 Architecture
+ Architecture
 The platform uses a modular, service-oriented design. The React frontend acts as a single user interface that consumes data from three independent backend apps: users, tournament, and coaching_app. This modularity allows for clear separation of concerns and made team-based development possible.
 
 ![Application Flowchart](Untitled diagram-2025-10-25-150557.jpg) 
 
-🏃‍♂️ Getting Started
+ Getting Started
 Prerequisites
 Python & Pip
 
