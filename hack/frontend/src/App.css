@@ -1,4 +1,4 @@
-/* Modern App styles - most styling now handled by Tailwind */
+
 
 .App {
   @apply min-h-screen w-full;

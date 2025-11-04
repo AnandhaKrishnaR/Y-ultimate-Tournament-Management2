@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/coaching' // Correct URL
+  baseURL: 'http://127.0.0.1:8000/api/coaching' 
 });
 
-// Add token to requests
+
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
@@ -34,7 +34,7 @@ function SessionAttendance() {
   const fetchSessions = async () => {
     try {
       setLoading(true);
-      // Coaches will only get sessions assigned to them
+      
       const response = await apiClient.get('/sessions/'); 
       setSessions(response.data);
     } catch (error) {
@@ -47,15 +47,15 @@ function SessionAttendance() {
   const handleSelectSession = async (session) => {
     setSelectedSession(session);
     try {
-      // Fetch all children assigned to this coach
+      
       const childrenResponse = await apiClient.get('/children/');
       setChildren(childrenResponse.data);
 
-      // Fetch existing attendance for this session
+      
       const attendanceResponse = await apiClient.get(`/attendance/?session_id=${session.id}`);
       const attendanceMap = {};
       attendanceResponse.data.forEach(att => {
-        // Use child ID as key
+        
         attendanceMap[att.child.id] = att.status; 
       });
       setAttendance(attendanceMap);
@@ -71,15 +71,15 @@ function SessionAttendance() {
     }));
   };
 
-  // Function to change session status
+  
   const updateSessionStatus = async (sessionId, newStatus) => {
     try {
       await apiClient.patch(`/sessions/${sessionId}/`, {
         status: newStatus
       });
-      // Update the status in our local state
+      
       setSelectedSession(prev => ({ ...prev, status: newStatus }));
-      fetchSessions(); // Refresh the main list
+      fetchSessions(); 
       alert(`Session marked as ${newStatus}!`);
     } catch (error) {
       console.error(`Error updating status:`, error);
@@ -94,7 +94,7 @@ function SessionAttendance() {
     try {
       setSubmitting(true);
       const attendanceData = children.map(child => ({
-        // Map all children assigned to coach, not just the ones in the map
+        
         child_id: child.id,
         status: attendance[child.id] || 'Absent'
       }));
@@ -117,7 +117,7 @@ function SessionAttendance() {
     return <p>Loading sessions...</p>;
   }
 
-  // --- VIEW 1: Session Selection List ---
+  
   if (!selectedSession) {
     return (
       <div className="max-w-4xl mx-auto">
@@ -134,7 +134,7 @@ function SessionAttendance() {
                 >
                   <p className="font-semibold text-gray-800">
                     {session.location} - {new Date(session.date).toLocaleDateString()}
-                    {/* Show status */}
+                   
                     <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${
                       session.status === 'SCHEDULED' ? 'bg-blue-100 text-blue-800' :
                       session.status === 'LIVE' ? 'bg-red-100 text-red-800' :
@@ -154,7 +154,7 @@ function SessionAttendance() {
     );
   }
 
-  // --- VIEW 2: Attendance Marking ---
+  
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-4">
@@ -174,7 +174,7 @@ function SessionAttendance() {
         <p className="text-gray-600">Status: {selectedSession.status}</p>
       </div>
 
-      {/* Show "Start" button if session is Scheduled */}
+      
       {selectedSession.status === 'SCHEDULED' && (
         <button
           onClick={() => updateSessionStatus(selectedSession.id, 'LIVE')}
@@ -184,7 +184,7 @@ function SessionAttendance() {
         </button>
       )}
 
-      {/* Show the attendance form if session is LIVE or COMPLETED */}
+      
       {(selectedSession.status === 'LIVE' || selectedSession.status === 'COMPLETED') && (
         <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow overflow-hidden">
           <div className="divide-y divide-gray-200">
@@ -197,7 +197,7 @@ function SessionAttendance() {
                   <button
                     type="button"
                     onClick={() => handleAttendanceChange(child.id, 'Present')}
-                    // Disable buttons if session is completed
+                   
                     disabled={selectedSession.status === 'COMPLETED'}
                     className={`px-4 py-2 rounded-lg font-medium transition ${
                       attendance[child.id] === 'Present'

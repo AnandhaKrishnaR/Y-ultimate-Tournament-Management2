@@ -11,7 +11,7 @@ const getApiClient = () => {
   });
 };
 
-// This component will be used for the 5 score inputs
+
 const ScoreInput = ({ label, value, onChange }) => (
   <div style={{ marginBottom: '10px' }}>
     <label>{label}: </label>
@@ -27,11 +27,11 @@ const ScoreInput = ({ label, value, onChange }) => (
 
 function SpiritScoreForm({ myTeams }) {
   const [matches, setMatches] = useState([]);
-  const [teams, setTeams] = useState([]); // To select opponent
+  const [teams, setTeams] = useState([]); 
   const [selectedMatch, setSelectedMatch] = useState('');
   const [targetTeam, setTargetTeam] = useState('');
   
-  // State for the 5 scores, defaulting to 2
+ 
   const [rulesKnowledge, setRulesKnowledge] = useState(2);
   const [foulsContact, setFoulsContact] = useState(2);
   const [fairMindedness, setFairMindedness] = useState(2);
@@ -42,7 +42,7 @@ function SpiritScoreForm({ myTeams }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Fetch all matches and teams
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,7 +83,7 @@ function SpiritScoreForm({ myTeams }) {
       const apiClient = getApiClient();
       await apiClient.post('/api/tournaments/spirit-scores/', scoreData);
       setSuccess('Spirit Score submitted successfully!');
-      // Reset form
+      
       setSelectedMatch('');
       setTargetTeam('');
       setRulesKnowledge(2);

@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-// Import All Your Components
+
 import Login from './Components/Login';       
 import Register from './Components/Register'; 
-import MainLayout from './Components/MainLayout'; // The new layout
+import MainLayout from './Components/MainLayout'; 
 import ResourceRepository from './Components/ResourceRepository';
 import DiscussionHub from './Components/DiscussionHub';
 import ThreadDetail from './Components/ThreadDetail';
 import MyCoachingProfile from './Components/MyCoachingProfile'; 
 
-// Import All Your Page Components
+
 import AdminDashboard from './Components/AdminDashboard';
 import CaptainDashboard from './Components/CaptainDashboard';
 import VolunteerDashboard from './Components/VolunteerDashboard';
@@ -24,28 +24,28 @@ import AddPlayerForm from './Components/AddPlayerForm';
 import RegisterTeamForm from './Components/RegisterTeamForm';
 import TournamentRegistration from './Components/TournamentRegistration';
 import MyTeams from './Components/MyTeams';
-import PlayerDashboard from './Components/PlayerDashboard'; // This is just the "My Teams" list
+import PlayerDashboard from './Components/PlayerDashboard'; 
 import ManageChildren from './Components/ManageChildren';
 
-// Import Phase 3 Components
+
 import CoachDashboard from './Components/CoachDashboard'; 
 import SessionAttendance from './Components/SessionAttendance';
 import LogHomeVisit from './Components/LogHomeVisit';
 import LogLSASAssessment from './Components/LogLSASAssessment';
 
 
-// --- ADD THESE 2 MISSING IMPORTS ---
+
 import AssignSessionForm from './Components/AssignSessionForm';
 import ViewAllSubmissions from './Components/ViewAllSubmissions';
-// ---------------------------------
 
-import './App.css'; // Your Tailwind CSS file
+
+import './App.css'; 
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing token on app load
+  
   useEffect(() => {
     const checkUser = async () => {
       const token = localStorage.getItem('accessToken');
@@ -56,7 +56,7 @@ function App() {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const response = await apiClient.get('/api/users/me/');
-          setUser(response.data); // Auto-login user
+          setUser(response.data); 
         } catch (err) {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
@@ -116,7 +116,7 @@ function PublicRoutes({ onLoginSuccess }) {
 }
 
 
-// --- Routes for main (logged-in) app ---
+
 function MainAppRoutes({ user, onLogout }) {
   const [tournaments, setTournaments] = useState([]);
   const [selectedTournament, setSelectedTournament] = useState('');
@@ -151,15 +151,15 @@ function MainAppRoutes({ user, onLogout }) {
           } 
         />
         
-        {/* Community Routes */}
+       
         <Route path="community/hub" element={<DiscussionHub />} />
         <Route path="community/threads/:id" element={<ThreadDetail />} />
         <Route path="community/resources" element={<ResourceRepository user={user} />} />
 
-        {/* Profile Route */}
+        
         <Route path="my-coaching-profile" element={<MyCoachingProfile user={user} />} />
 
-        {/* Admin Routes */}
+        
         <Route path="admin/create-tournament" element={<CreateTournamentForm />} />
         <Route path="admin/generate-schedule" element={<ScheduleGenerator />} />
         <Route path="admin/create-user" element={<CreateUserForm />} />
@@ -167,14 +167,14 @@ function MainAppRoutes({ user, onLogout }) {
         <Route path="admin/assign-session" element={<AssignSessionForm />} />
         <Route path="admin/view-submissions" element={<ViewAllSubmissions />} />
         
-        {/* Captain Routes */}
+        
         <Route path="captain/create-team" element={<RegisterTeamForm />} />
         <Route path="captain/register-team" element={<TournamentRegistration />} />
         <Route path="captain/add-player" element={<AddPlayerForm />} />
         <Route path="captain/my-teams" element={<MyTeams user={user} />} />
         <Route path="captain/spirit-score" element={<SpiritScoreForm />} />
 
-        {/* Coach Routes */}
+        
         <Route path="coach/attendance" element={<SessionAttendance />} />
         <Route path="coach/home-visit" element={<LogHomeVisit />} />
         <Route path="coach/lsas" element={<LogLSASAssessment />} />
@@ -185,7 +185,7 @@ function MainAppRoutes({ user, onLogout }) {
   );
 }
 
-// --- Helper component to show the correct *default* dashboard page (at '/') ---
+
 const RoleBasedDashboard = ({ user, tournaments, selectedTournament, onTournamentSelect }) => {
   switch (user.role) {
     case 'ADMIN':
@@ -197,7 +197,7 @@ const RoleBasedDashboard = ({ user, tournaments, selectedTournament, onTournamen
     case 'VOLUNTEER':
       return <VolunteerDashboard />;
     
-    // PLAYER and SPECTATOR are the same
+    
     case 'PLAYER':
     case 'SPECTATOR':
     default:

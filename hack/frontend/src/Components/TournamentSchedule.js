@@ -12,7 +12,7 @@ function TournamentSchedule({ tournamentId }) {
 
   useEffect(() => {
     const fetchMatches = async () => {
-      // If no tournament is selected, don't fetch
+      
       if (!tournamentId) {
         setMatches([]);
         setLoading(false);
@@ -21,7 +21,7 @@ function TournamentSchedule({ tournamentId }) {
 
       setLoading(true);
       try {
-        // Use the new, specific API endpoint
+        
         const response = await apiClient.get(`/api/tournaments/${tournamentId}/matches/`);
         setMatches(response.data);
       } catch (err) {
@@ -33,9 +33,9 @@ function TournamentSchedule({ tournamentId }) {
     };
 
     fetchMatches();
-  }, [tournamentId]); // Re-run this effect when tournamentId changes
+  }, [tournamentId]); 
 
-  // Add a message if no tournament is selected
+  
   if (!tournamentId) {
     return <p>Please select a tournament to view the schedule.</p>;
   }
@@ -48,12 +48,12 @@ function TournamentSchedule({ tournamentId }) {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
 
-  // --- NEW HELPER FUNCTION for display ---
+  
   const renderScore = (match) => {
     if (match.status === 'SCHEDULED') {
-      return ' - '; // Show dash for scheduled games
+      return ' - '; 
     }
-    // Show 0-0 for live games that just started, or the actual score
+    
     return `${match.team_a_score ?? 0} - ${match.team_b_score ?? 0}`;
   };
 

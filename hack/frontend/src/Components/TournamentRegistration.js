@@ -11,16 +11,16 @@ const getApiClient = () => {
   });
 };
 
-// 1. Remove 'myTeams' from props
+
 function TournamentRegistration() {
   const [tournaments, setTournaments] = useState([]);
-  const [myTeams, setMyTeams] = useState([]); // 2. Add state for myTeams
+  const [myTeams, setMyTeams] = useState([]); 
   const [selectedTeam, setSelectedTeam] = useState('');
   const [selectedTournament, setSelectedTournament] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // 3. Fetch both tournaments and teams
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,8 +31,7 @@ function TournamentRegistration() {
         ]);
         
         setTournaments(tournamentsRes.data);
-        // We can't filter by user here easily, so we show all teams
-        // This can be improved later by fetching /api/users/me/ first
+        
         setMyTeams(teamsRes.data); 
       } catch (err) {
         console.error('Failed to fetch data:', err);
@@ -41,7 +40,7 @@ function TournamentRegistration() {
     fetchData();
   }, []);
 
-  // ... (handleSubmit function is unchanged) ...
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');

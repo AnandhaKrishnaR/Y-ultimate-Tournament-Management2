@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom'; // useParams gets the ID from the URL
+import { useParams, Link } from 'react-router-dom'; 
 import axios from 'axios';
 
 const getApiClient = () => {
@@ -13,16 +13,16 @@ const getApiClient = () => {
 };
 
 function ThreadDetail() {
-  const { id } = useParams(); // Get the thread ID from the route
+  const { id } = useParams(); 
   const [thread, setThread] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Form state for new reply
+  
   const [replyContent, setReplyContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Fetch the single thread
+  
   const fetchThread = async () => {
     try {
       setLoading(true);
@@ -38,9 +38,9 @@ function ThreadDetail() {
 
   useEffect(() => {
     fetchThread();
-  }, [id]); // Re-fetch if the ID changes
+  }, [id]); 
 
-  // Handle new reply submission
+  
   const handleSubmitReply = async (e) => {
     e.preventDefault();
     if (!replyContent) return;
@@ -49,11 +49,11 @@ function ThreadDetail() {
     try {
       const apiClient = getApiClient();
       await apiClient.post('/replies/', {
-        thread: id, // Link this reply to the current thread ID
+        thread: id, 
         content: replyContent
       });
-      setReplyContent(''); // Clear the form
-      fetchThread(); // Refresh the whole thread to show the new reply
+      setReplyContent(''); 
+      fetchThread(); 
     } catch (err) {
       setError(`Failed to post reply: ${JSON.stringify(err.response.data)}`);
     } finally {
@@ -69,7 +69,7 @@ function ThreadDetail() {
     <div className="space-y-6">
       <Link to="/community/hub" className="text-indigo-600 hover:underline">&larr; Back to all threads</Link>
       
-      {/* The main thread post */}
+      
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-3xl font-bold text-gray-800">{thread.title}</h2>
         <p className="text-sm text-gray-500 mt-2">
@@ -78,7 +78,7 @@ function ThreadDetail() {
         <p className="text-gray-700 mt-4 whitespace-pre-wrap">{thread.content}</p>
       </div>
 
-      {/* Form to add a new reply */}
+      
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">Post a Reply</h3>
         <form onSubmit={handleSubmitReply} className="space-y-4">
@@ -102,7 +102,7 @@ function ThreadDetail() {
         </form>
       </div>
 
-      {/* List of existing replies */}
+      
       <div className="space-y-4">
         <h3 className="text-2xl font-semibold text-gray-800">Replies ({thread.replies.length})</h3>
         {thread.replies.map(reply => (

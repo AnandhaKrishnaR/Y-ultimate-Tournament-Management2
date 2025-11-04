@@ -66,7 +66,7 @@ function Sidebar({ userRole, onLogout }) {
         return (
           <>
             <li><NavLink to="/" className={navLinkClass} end>Schedule & Scores</NavLink></li>
-            {/* --- ADD THIS NEW LINK --- */}
+            
             <li><NavLink to="/my-coaching-profile" className={navLinkClass}>My Coaching Profile</NavLink></li>
             {commonLinks}
           </>
