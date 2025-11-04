@@ -59,60 +59,22 @@ Resource Repository: A page where all users can view and download files (like ru
 
 Discussion Hub: A complete forum system where any logged-in user can post a new "Thread" and post "Replies" to existing threads.
 
-🛠 Tech Stack
-Category	Technology	Justification
+ Tech Stack
+
 Frontend	React.js	
-The component-based architecture was perfect for building the many role-based dashboards and reusable forms (like spirit scoring)[cite: 166].
+The component-based architecture was perfect for building the many role-based dashboards and reusable forms (like spirit scoring).
 
 Backend	Django (DRF)	
-Django's "batteries-included" philosophy, especially its built-in Admin and security, was critical for rapidly building the Phase 1 RBAC system[cite: 169].
+Django's "batteries-included" philosophy, especially its built-in Admin and security, was critical for rapidly building the Phase 1 RBAC system.
 
 Database	MySQL	
-A powerful relational database was essential to solve the core problem of data fragmentation and manage the complex links between users, children, teams, and tournaments [cite: 173-174].
+A powerful relational database was essential to solve the core problem of data fragmentation and manage the complex links between users, children, teams, and tournaments .
 
 
-Export to Sheets
+
 
  Architecture
 The platform uses a modular, service-oriented design. The React frontend acts as a single user interface that consumes data from three independent backend apps: users, tournament, and coaching_app. This modularity allows for clear separation of concerns and made team-based development possible.
-
-![Application Flowchart](Untitled diagram-2025-10-25-150557.jpg) 
-
- Getting Started
-Prerequisites
-Python & Pip
-
-Node.js & npm
-
-A running MySQL server
-
-1. Backend Setup (Django)
-Clone the repository: git clone ...
-
-Navigate to the project root: cd visionx
-
-Create requirements.txt: Run pip freeze > requirements.txt (or install the libraries manually: pip install django djangorestframework djangorestframework-simplejwt mysqlclient django-cors-headers).
-
-Install dependencies: pip install -r requirements.txt
-
-Configure Database: Open visionx/settings.py and update the DATABASES setting with your MySQL username, password, and database name.
-
-Run Migrations: python manage.py makemigrations and python manage.py migrate
-
-Create Admin: python manage.py createsuperuser
-
-Run Server: python manage.py runserver
-
-2. Frontend Setup (React)
-Open a new terminal.
-
-Navigate to the frontend folder: cd visionx/frontend
-
-Install dependencies: npm install
-
-Run Server: npm start
-
-Your app will be live at http://localhost:3000.
 
  User Roles & Workflow
 Admin: Log in with the superuser you created. Has full access to all dashboards and admin-only pages.
