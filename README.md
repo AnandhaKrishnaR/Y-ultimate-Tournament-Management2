@@ -1,7 +1,3 @@
-Here is a complete README.md file for your project.
-
-You can copy and paste this text into a new file named README.md in the root of your visionx project folder (at the same level as manage.py).
-
 Y-Ultimate Management Platform (VisionX)
 This is an open-source, unified web application built by Team VisionX  for the Tech4Social Good Hackathon. Its mission is to solve data fragmentation for the non-profit Y-Ultimate by replacing their manual Google Sheets and Forms with a single, data-driven platform for managing both tournaments and coaching programs.
 
